@@ -4,6 +4,9 @@
 
 int main(void)
 {
-    printf("hello world\n");
+    t_info  data;
+    int     state;
+
+    if(init_data(&data))
     return (0);
 }
