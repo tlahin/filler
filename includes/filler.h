@@ -1,4 +1,14 @@
-//header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   filler.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tlahin <tlahin@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/03 13:21:19 by tlahin            #+#    #+#             */
+/*   Updated: 2022/10/03 13:21:21 by tlahin           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
@@ -20,7 +30,7 @@ typedef struct  s_cords
     int         cols;
 }               t_cords;
 
-typedef struct  s_info
+typedef struct  s_struct
 {
     t_size      board_size;
     t_size      piece_size;
@@ -41,7 +51,7 @@ typedef struct  s_info
     t_cords     piece_end;
     bool        center_captured;
     bool        center_row_captured;
-}               t_info;
+}               t_struct;
 
 #endif
 
