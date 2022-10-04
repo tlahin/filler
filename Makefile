@@ -13,7 +13,8 @@
 NAME = tlahin.filler
 
 SRCS_DIR = sources/
-SRCS =	main.c
+SRCS =	main.c \
+		parser.C
 
 INCLS = -I./ft_printf/includes -I./includes
 
