@@ -16,8 +16,6 @@
 # include "../ft_printf/includes/ft_printf.h"
 # include <stdio.h> //?
 
-int main(void);
-
 typedef struct  s_size
 {
     int         row;
@@ -52,6 +50,8 @@ typedef struct  s_struct
     bool        center_captured;
     bool        center_row_captured;
 }               t_struct;
+
+int main(void);
 
 #endif
 
