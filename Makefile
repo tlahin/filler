@@ -15,7 +15,9 @@ NAME = tlahin.filler
 SRCS_DIR = sources/
 SRCS =	main.c \
 		parser.C \
-		arr.c
+		arr.c \
+		utilities.c \
+		heatmap.c
 
 INCLS = -I./ft_printf/includes -I./includes
 
