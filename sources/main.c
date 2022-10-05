@@ -45,7 +45,7 @@ int main(void)
         return (free_stuff(&data, -1));
     while (state >= 0)
     {
-        if (parse_board(&data) == 0 && parse_piece(&data) == 0)
+        if (board_parser(&data) == 0 && piece_parser(&data) == 0)
         {
             update_heatmap(&data);
             state = find_solution(&data);

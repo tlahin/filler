@@ -37,6 +37,35 @@ int size_parser(int *row, int *col)
     return (0);
 }
 
+int piece_parser(t_struct *data)
+{
+    char    tmp[1];
+    int     row;
+    int     col;
+
+    row = 0;
+    col = 0;
+    if (size_parser(&data->piece_size.row, &data->piece_size.col) == -1)
+        return (-1);
+    data->piece = make_char_arr(data->piece_size.row, \
+        data->piece_size.col);
+    if (!data->piece)
+        return (-1);
+    while (row < data->piece_size.row)
+    {
+        while (col < data->piece_size.col)
+        {
+            if (read(0, tmp, 1) == -1)
+                return (-1);
+            if (ft_strchr("*.", tmp[0]))
+                data->piece[row][col++] = tmp[0];
+        }
+        row++;
+    }
+    find_borders(data);
+    return (0);
+}
+
 int board_parser(t_struct *data)
 {
     char    tmp[1];
