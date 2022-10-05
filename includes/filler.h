@@ -57,5 +57,18 @@ int     **make_int_arr(t_struct *data);
 void    free_char_arr(char **arr);
 void    free_int_arr(int **arr, t_struct *data);
 
+//parsers
+int     number_parser(char last);
+int     size_parser(int *row, int *col);
+int     piece_parser(t_struct *data);
+int     board_parser(t_struct *data);
+int     player_parser(t_struct *data);
+
+//heatmap
+void    update_heatmap(t_struct *data);
+static void get_center(t_struct *data);
+static void reset_heatmap(t_struct *data);
+static void set_heatmap(t_struct *info, int heat);
+static void set_near(t_struct *data, int heat, int row, int col);
 #endif
 
