@@ -15,9 +15,9 @@
 int	free_stuff(t_struct *data, int ret)
 {
 	if (data->board)
-		free_char_array(data->board);
+		free_char_arr(data->board);
 	if (data->heatmap)
-		free_int_array(data->heatmap, data);
+		free_int_arr(data->heatmap, data);
 	return (ret);
 }
 
@@ -27,9 +27,9 @@ int init_struct(t_struct *data)
     if (player_parser(data) == -1 || size_parser(&data->board_size.row, \
         &data->board_size.col) == -1)
         return (-1);
-    data->board = create_char_array(data->board_size.row, \
+    data->board = make_char_arr(data->board_size.row, \
         data->board_size.col);
-    data->heatmap = create_int_array(data);
+    data->heatmap = make_int_arr(data);
     if (!data->heatmap || data->board)
         return (-1);
     return (0);
@@ -49,7 +49,7 @@ int main(void)
         {
             update_heatmap(&data);
             state = find_solution(&data);
-            free_char_array(data.piece);
+            free_char_arr(data.piece);
         }
         else
             state = -1;
