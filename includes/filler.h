@@ -35,7 +35,7 @@ typedef struct  s_struct
     char        enemy;
     char        player;
     char        **board;
-    char        **heatmap;
+    int         **heatmap;
     char        **piece;
     t_cords     board_cords;
     t_cords     piece_cords;
@@ -51,7 +51,11 @@ typedef struct  s_struct
     bool        center_row_captured;
 }               t_struct;
 
-int main(void);
+int     main(void);
+char    **make_char_arr(int rows, int cols);
+int     **make_int_arr(t_struct *data);
+void    free_char_arr(char **arr);
+void    free_int_arr(int **arr, t_struct *data);
 
 #endif
 
