@@ -14,10 +14,12 @@ NAME = tlahin.filler
 
 SRCS_DIR = sources/
 SRCS =	main.c \
-		parser.C \
+		parser.c \
 		arr.c \
 		utilities.c \
-		heatmap.c
+		heatmap.c \
+		middle.c \
+		solver.c
 
 INCLS = -I./ft_printf/includes -I./includes
 
