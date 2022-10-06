@@ -21,38 +21,38 @@ int	free_stuff(t_struct *data, int ret)
 	return (ret);
 }
 
-int init_struct(t_struct *data)
+int	init_struct(t_struct *data)
 {
-    ft_bzero(data, sizeof (*data));
-    if (player_parser(data) == -1 || size_parser(&data->board_size.row, \
-        &data->board_size.col) == -1)
-        return (-1);
-    data->board = make_char_arr(data->board_size.row, \
-        data->board_size.col);
-    data->heatmap = make_int_arr(data);
-    if (!data->heatmap || data->board)
-        return (-1);
-    return (0);
+	ft_bzero(data, sizeof (*data));
+	if (player_parser(data) == -1 || size_parser(&data->board_size.row, \
+		&data->board_size.col) == -1)
+		return (-1);
+	data->board = make_char_arr(data->board_size.row, \
+		data->board_size.col);
+	data->heatmap = make_int_arr(data);
+	if (!data->heatmap || data->board)
+		return (-1);
+	return (0);
 }
 
-int main(void)
+int	main(void)
 {
-    t_struct  data;
-    int     state;
+	t_struct	data;
+	int			state;
 
-    state = 1;
-    if(init_struct(&data) == -1)
-        return (free_stuff(&data, -1));
-    while (state >= 0)
-    {
-        if (board_parser(&data) == 0 && piece_parser(&data) == 0)
-        {
-            update_heatmap(&data);
-            state = find_solution(&data);
-            free_char_arr(data.piece);
-        }
-        else
-            state = -1;
-    }
-    return (free_stuff(&data, state));
+	state = 1;
+	if (init_struct(&data) == -1)
+		return (free_stuff(&data, -1));
+	while (state >= 0)
+	{
+		if (board_parser(&data) == 0 && piece_parser(&data) == 0)
+		{
+			update_heatmap(&data);
+			//state = solve(&data);
+			free_char_arr(data.piece);
+		}
+		else
+			state = -1;
+	}
+	return (free_stuff(&data, state));
 }
