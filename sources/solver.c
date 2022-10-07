@@ -123,4 +123,4 @@ int	solve(t_struct *data)
 		row++;
 	}
 	return (print(data));
-	}
+}

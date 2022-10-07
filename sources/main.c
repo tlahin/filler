@@ -48,7 +48,7 @@ int	main(void)
 		if (board_parser(&data) == 0 && piece_parser(&data) == 0)
 		{
 			update_heatmap(&data);
-			//state = solve(&data);
+			state = solve(&data);
 			free_char_arr(data.piece);
 		}
 		else
