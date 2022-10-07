@@ -19,7 +19,8 @@ SRCS =	main.c \
 		utilities.c \
 		heatmap.c \
 		middle.c \
-		solver.c
+		solver.c \
+		printer.c
 
 INCLS = -I./ft_printf/includes -I./includes
 

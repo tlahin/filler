@@ -16,19 +16,19 @@
 # include "../ft_printf/includes/ft_printf.h"
 # include <stdio.h> //?
 
-typedef struct	s_size
+typedef struct s_size
 {
 	int			row;
 	int			col;
 }				t_size;
 
-typedef struct	s_cords
+typedef struct s_cords
 {
 	int			row;
 	int			col;
 }				t_cords;
 
-typedef struct	s_struct
+typedef struct s_struct
 {
 	t_size		board_size;
 	t_size		piece_size;
@@ -74,9 +74,15 @@ void	update_middle(t_struct *data);
 int		distance_to_middle(t_struct *data, int row, int col);
 
 //utility
+t_cords	get_offset(int row, int col, t_cords piece, t_cords board);
+bool	on_board(t_struct *data, int row, int col);
 void	find_borders(t_struct *data);
 
 //solver
-int	solve(t_struct *data);
-#endif
+int		solve(t_struct *data);
 
+//printer
+int		print(t_struct *data);
+void	save_result(t_struct *data, int val, t_cords board, t_cords piece);
+
+#endif
