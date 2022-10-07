@@ -92,7 +92,8 @@ int	board_parser(t_struct *data)
 				return (-1);
 			if (ft_strchr("XOxo.", tmp[0]))
 			{
-				data->board[row][col] = ft_toupper(tmp[0]); //char_parser(tmp[0]);
+				data->board[row][col] = ft_toupper(tmp[0]);
+				//char_parser(tmp[0]);
 				col++;
 			}
 		}
