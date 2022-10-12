@@ -37,9 +37,9 @@ void	find_borders(t_struct *data)
 	row = 0;
 	col = 0;
 	reset_points(data);
-	while (row < data->piece_size.row)
+	while (row < data->piece_size.rows)
 	{
-		while (col < data->piece_size.col)
+		while (col < data->piece_size.cols)
 		{
 			if (data->piece[row][col] == '*')
 			{
@@ -58,12 +58,19 @@ void	find_borders(t_struct *data)
 	}
 }
 
+char	char_parser(char c)
+{
+	if (c == 'x')
+		return ('X');
+	else if (c == 'o')
+		return ('O');
+	else
+		return (c);
+}
+
 bool	on_board(t_struct *data, int row, int col)
 {
-	if (row >= 0 && col >= 0
-		&& row < data->board_size.row
-		&& col < data->board_size.col)
-		return (true);
-	else
-		return (false);
+	return (row >= 0 && col >= 0
+		&& row < data->board_size.rows
+		&& col < data->board_size.cols);
 }

@@ -45,19 +45,14 @@ all : $(NAME)
 
 $(NAME) :
 	@make -C ./libft
-	@echo "Compiling.."
 	@gcc -c $(FLAGS) $(INCLS) $(addprefix $(SRCS_DIR), $(SRCS))
-	@echo "Creating library libftprintf.a.."
 	@ar rcs $(NAME) $(OBJS)
-	@echo "Make complete."
 
 clean :
-	@echo "Removing object files.."
 	@make -C ./libft/ clean
 	@rm -f $(OBJS)
 
 fclean : clean
-	@echo "Removing library.."
 	@make -C ./libft/ fclean
 	@rm -f $(NAME)
 

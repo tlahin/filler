@@ -44,7 +44,7 @@ clean :
 	@rm -f $(OBJS)
 
 fclean : clean
-	@echo "Removing library.."
+	@echo "Removing executabble.."
 	@make -C ft_printf/ fclean
 	@rm -f $(NAME)
 

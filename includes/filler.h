@@ -18,8 +18,8 @@
 
 typedef struct s_size
 {
-	int			row;
-	int			col;
+	int			rows;
+	int			cols;
 }				t_size;
 
 typedef struct s_cords
@@ -63,6 +63,7 @@ int		size_parser(int *row, int *col);
 int		piece_parser(t_struct *data);
 int		board_parser(t_struct *data);
 int		player_parser(t_struct *data);
+char	char_parser(char c);
 
 //heatmap
 void	update_heatmap(t_struct *data);

@@ -24,13 +24,13 @@ int	free_stuff(t_struct *data, int ret)
 int	init_struct(t_struct *data)
 {
 	ft_bzero(data, sizeof (*data));
-	if (player_parser(data) == -1 || size_parser(&data->board_size.row, \
-		&data->board_size.col) == -1)
+	if (size_parser(&data->board_size.rows, &data->board_size.cols) == -1 \
+		|| player_parser(data) == -1)
 		return (-1);
-	data->board = make_char_arr(data->board_size.row, \
-		data->board_size.col);
+	data->board = make_char_arr(data->board_size.rows, \
+		data->board_size.cols);
 	data->heatmap = make_int_arr(data);
-	if (!data->heatmap || data->board)
+	if (!data->heatmap || !data->board)
 		return (-1);
 	return (0);
 }

@@ -33,6 +33,7 @@ char		*ft_strncat(char *dst, const char *src, size_t n);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
+int			ft_abs(int value);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 int			ft_isalnum(int c);
@@ -80,6 +81,6 @@ int			ft_number_size_base(uintmax_t number, int base);
 char		*ft_itoa_base(uintmax_t number, int base);
 int			ft_number_size(intmax_t number);
 long double	ft_powl(long double x, long double y);
-int			ft_abs(int value);
+int			ft_bankers(long double number, int prec);
 
 #endif

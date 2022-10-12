@@ -13,12 +13,11 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdarg.h>
-# include "../libft/libft.h"
 # include <stdint.h>
 # include <stdbool.h>
-# include <stdint.h>
 
 typedef struct s_data
 {
@@ -74,5 +73,6 @@ t_data		*init_data(t_data *info);
 t_data		*reset_data(t_data *info);
 void		put_simple_di(t_data *info, intmax_t number);
 void		put_di(t_data *info, int zero);
+t_data		*check_inf(t_data *info, long double number);
 
 #endif

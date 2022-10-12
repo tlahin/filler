@@ -22,7 +22,7 @@ int	number_parser(char last)
 	while (ft_isdigit(tmp))
 	{
 		nbr = nbr * 10 + (tmp - '0');
-		if (read(0, &tmp, 1) < 0)
+		if (read(STDIN_FILENO, &tmp, 1) < 0)
 			return (-1);
 	}
 	return (nbr);
@@ -33,14 +33,14 @@ int	size_parser(int *row, int *col)
 	char	tmp;
 	int		state;
 
-	tmp = '#';
+	tmp = ',';
 	state = 1;
 	while (!ft_isdigit(tmp) && state > 0)
-		state = read(0, &tmp, 1);
+		state = read(STDIN_FILENO, &tmp, 1);
 	*row = number_parser(tmp);
-	state = read(0, &tmp, 1);
+	state = read(STDIN_FILENO, &tmp, 1);
 	while (!ft_isdigit(tmp) && state > 0)
-		state = read(0, &tmp, 1);
+		state = read(STDIN_FILENO, &tmp, 1);
 	*col = number_parser(tmp);
 	if (*row <= 0 || *col <= 0 || state == -1)
 		return (-1);
@@ -55,17 +55,17 @@ int	piece_parser(t_struct *data)
 
 	row = 0;
 	col = 0;
-	if (size_parser(&data->piece_size.row, &data->piece_size.col) == -1)
+	if (size_parser(&data->piece_size.rows, &data->piece_size.cols) == -1)
 		return (-1);
-	data->piece = make_char_arr(data->piece_size.row, \
-		data->piece_size.col);
+	data->piece = make_char_arr(data->piece_size.rows, \
+		data->piece_size.cols);
 	if (!data->piece)
 		return (-1);
-	while (row < data->piece_size.row)
+	while (row < data->piece_size.rows)
 	{
-		while (col < data->piece_size.col)
+		while (col < data->piece_size.cols)
 		{
-			if (read(0, tmp, 1) == -1)
+			if (read(STDIN_FILENO, tmp, 1) == -1)
 				return (-1);
 			if (ft_strchr("*.", tmp[0]))
 				data->piece[row][col++] = tmp[0];
@@ -84,16 +84,15 @@ int	board_parser(t_struct *data)
 
 	row = 0;
 	col = 0;
-	while (row < data->board_size.row)
+	while (row < data->board_size.rows)
 	{
-		while (col < data->board_size.col)
+		while (col < data->board_size.cols)
 		{
-			if (read(0, tmp, 1) == -1)
+			if (read(STDIN_FILENO, tmp, 1) == -1)
 				return (-1);
-			if (ft_strchr("XOxo.", tmp[0]))
+			if (ft_strchr("XxOo.", tmp[0]))
 			{
-				data->board[row][col] = ft_toupper(tmp[0]);
-				//char_parser(tmp[0]);
+				data->board[row][col] = char_parser(tmp[0]);
 				col++;
 			}
 		}
@@ -110,7 +109,7 @@ int	player_parser(t_struct *data)
 	tmp = '#';
 	while (!ft_isdigit(tmp))
 	{
-		if (read(0, &tmp, 1) < 0)
+		if (read(STDIN_FILENO, &tmp, 1) < 0)
 			return (-1);
 	}
 	if (tmp == '1')

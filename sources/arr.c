@@ -19,8 +19,7 @@ void	free_char_arr(char **arr)
 	i = 0;
 	while (arr[i])
 	{
-		free(arr[i]);
-		arr[i] = NULL;
+		ft_strdel(&arr[i]);
 		i++;
 	}
 	free(arr);
@@ -32,7 +31,7 @@ void	free_int_arr(int **arr, t_struct *data)
 	int	i;
 
 	i = 0;
-	while (i < data->board_size.row)
+	while (i < data->board_size.rows)
 	{
 		free(arr[i]);
 		i++;
@@ -69,12 +68,12 @@ int	**make_int_arr(t_struct *data)
 	int	i;
 
 	i = 0;
-	arr = (int **)malloc(sizeof(int *) * data->board_size.row);
+	arr = (int **)malloc(sizeof(int *) * data->board_size.rows);
 	if (!arr)
 		return (NULL);
-	while (i < data->board_size.row)
+	while (i < data->board_size.rows)
 	{
-		arr[i] = (int *)malloc(sizeof(int) * data->board_size.col);
+		arr[i] = (int *)malloc(sizeof(int) * data->board_size.cols);
 		if (!arr[i])
 		{
 			free_int_arr(arr, data);

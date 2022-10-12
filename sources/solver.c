@@ -56,7 +56,7 @@ static void	place_piece(t_struct *data, t_cords board_cords)
 
 	piece_row = data->piece_start.row;
 	piece_col = data->piece_end.col - 1;
-	while (piece_row <= data->piece_end.row)
+	while (piece_row++ <= data->piece_end.row)
 	{
 		while (piece_col++ <= data->piece_end.col - 1)
 		{
@@ -72,7 +72,6 @@ static void	place_piece(t_struct *data, t_cords board_cords)
 					save_result(data, value, board_cords, piece_cords);
 			}
 		}
-		piece_row++;
 	}
 }
 
@@ -109,9 +108,9 @@ int	solve(t_struct *data)
 	data->hottest_val = -1;
 	row = 0;
 	col = 0;
-	while (row < data->board_size.row)
+	while (row < data->board_size.rows)
 	{
-		while (col < data->board_size.col)
+		while (col < data->board_size.cols)
 		{
 			tmp_cords.row = row;
 			tmp_cords.col = col;

@@ -21,7 +21,7 @@ t_data	*print_char(t_data *info)
 		info->len += 1;
 		while (info->width - 1 >= 1)
 		{
-			print_alternative(info, 32, 1);
+			print_alternative(info, ' ', 1);
 			info->width--;
 		}
 	}
@@ -29,7 +29,7 @@ t_data	*print_char(t_data *info)
 	{
 		while ((info->width -1) > 0)
 		{
-			print_alternative(info, 32, 1);
+			print_alternative(info, ' ', 1);
 			info->width--;
 		}
 		ft_putchar(va_arg(info->args, int));

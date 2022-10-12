@@ -23,11 +23,11 @@ bool	is_middle_taken(t_struct *data)
 	int	row;
 	int	col;
 
-	row = data->board_size.row / 2;
-	col = data->board_size.col / 2;
-	while (row <= data->board_size.row / 2 + 1)
+	row = data->board_size.rows / 2;
+	col = data->board_size.cols / 2;
+	while (row <= data->board_size.rows / 2 + 1)
 	{
-		while (col <= data->board_size.col / 2 + 1)
+		while (col <= data->board_size.cols / 2 + 1)
 		{
 			if (data->board[row][col] != '.')
 				return (true);
@@ -43,9 +43,9 @@ bool	is_middle_row_taken(t_struct *data)
 	int	row;
 	int	col;
 
-	row = data->board_size.row / 2;
+	row = data->board_size.rows / 2;
 	col = 0;
-	while (col < data->board_size.col)
+	while (col < data->board_size.cols)
 	{
 		if (data->board[row][col] == data->player)
 			return (true);
@@ -59,7 +59,7 @@ int	distance_to_middle(t_struct *data, int row, int col)
 	int	middle_row;
 	int	middle_col;
 
-	middle_row = data->board_size.row / 2;
-	middle_col = data->board_size.col / 2;
+	middle_row = data->board_size.rows / 2;
+	middle_col = data->board_size.cols / 2;
 	return (ft_abs(middle_row - row) + ft_abs(middle_col - col));
 }
