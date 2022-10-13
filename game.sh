@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# by briffard | Baptiste
+
 usage()
 {
     echo -e "usage: ./game.sh [player-name] [number of games]"
