@@ -14,7 +14,11 @@
 # define FILLER_H
 
 # include "../ft_printf/includes/ft_printf.h"
-# include <stdio.h> //?
+# include <stdio.h>
+
+/*
+** Structures
+*/
 
 typedef struct s_size
 {
@@ -51,13 +55,20 @@ typedef struct s_struct
 	bool		middle_row_taken;
 }				t_struct;
 
+/*
+** Main and arrs
+*/
+
 int		main(void);
 char	**make_char_arr(int rows, int cols);
 int		**make_int_arr(t_struct *data);
 void	free_char_arr(char **arr);
 void	free_int_arr(int **arr, t_struct *data);
 
-//parsers
+/*
+** Parsers
+*/
+
 int		number_parser(char last);
 int		size_parser(int *row, int *col);
 int		piece_parser(t_struct *data);
@@ -65,24 +76,39 @@ int		board_parser(t_struct *data);
 int		player_parser(t_struct *data);
 char	char_parser(char c);
 
-//heatmap
+/*
+** Heatmap
+*/
+
 void	update_heatmap(t_struct *data);
 
-//middle
+/*
+** Middles
+*/
+
 bool	is_middle_row_taken(t_struct *data);
 bool	is_middle_taken(t_struct *data);
 void	update_middle(t_struct *data);
 int		distance_to_middle(t_struct *data, int row, int col);
 
-//utility
+/*
+** Utilities
+*/
+
 t_cords	get_offset(int row, int col, t_cords piece, t_cords board);
 bool	on_board(t_struct *data, int row, int col);
 void	find_borders(t_struct *data);
 
-//solver
+/*
+** Solver
+*/
+
 int		solve(t_struct *data);
 
-//printer
+/*
+** Printter
+*/
+
 int		print(t_struct *data);
 void	save_result(t_struct *data, int val, t_cords board, t_cords piece);
 
