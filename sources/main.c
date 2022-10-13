@@ -12,6 +12,10 @@
 
 #include "filler.h"
 
+/*
+** Frees the both char and int arrays
+*/
+
 int	free_stuff(t_struct *data, int ret)
 {
 	if (data->board)
@@ -21,9 +25,14 @@ int	free_stuff(t_struct *data, int ret)
 	return (ret);
 }
 
+/*
+** Initializing all the variables in the struct
+** and create both board and heatmap arrays
+*/
+
 int	init_struct(t_struct *data)
 {
-	ft_bzero(data, sizeof (*data));
+	ft_bzero(data, sizeof(*data));
 	if (size_parser(&data->board_size.rows, &data->board_size.cols) == -1 \
 		|| player_parser(data) == -1)
 		return (-1);
