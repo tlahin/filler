@@ -12,18 +12,18 @@
 
 #include "filler.h"
 
-void	save_result(t_struct *data, int val, t_cords board, t_cords piece)
+void	save_result(t_struct *filler, int value, t_cords board, t_cords piece)
 {
-	data->hottest_val = val;
-	data->result.row = board.row - piece.row;
-	data->result.col = board.col - piece.col;
+	filler->best_val = value;
+	filler->result.row = board.row - piece.row;
+	filler->result.col = board.col - piece.col;
 }
 
-int	print(t_struct *data)
+int	print_result(t_struct *filler)
 {
-	if (data->hottest_val >= 0)
+	if (filler->best_val >= 0)
 	{
-		ft_printf("%d %d\n", data->result.row, data->result.col);
+		ft_printf("%d %d\n", filler->result.row, filler->result.col);
 		return (0);
 	}
 	else

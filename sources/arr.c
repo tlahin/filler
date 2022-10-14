@@ -12,74 +12,75 @@
 
 #include "filler.h"
 
-void	free_char_arr(char **arr)
+void	free_char_array(char **array)
 {
 	int	i;
 
 	i = 0;
-	while (arr[i])
+	while (array[i])
 	{
-		ft_strdel(&arr[i]);
+		free(array[i]);
+		array[i] = NULL;
 		i++;
 	}
-	free(arr);
-	arr = NULL;
+	free(array);
+	array = NULL;
 }
 
-void	free_int_arr(int **arr, t_struct *data)
+char	**create_char_array(int rows, int cols)
 {
-	int	i;
-
-	i = 0;
-	while (i < data->board_size.rows)
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-char	**make_char_arr(int rows, int cols)
-{
-	char	**arr;
+	char	**array;
 	int		i;
 
-	arr = (char **)malloc(sizeof(char *) * (rows + 1));
-	if (!arr)
+	array = (char **)malloc(sizeof(char *) * (rows + 1));
+	if (!array)
 		return (NULL);
 	i = 0;
 	while (i < rows)
 	{
-		arr[i] = ft_strnew(cols);
-		if (!arr[i])
+		array[i] = ft_strnew(cols);
+		if (!array[i])
 		{
-			free_char_arr(arr);
+			free_char_array(array);
 			return (NULL);
 		}
 		i++;
 	}
-	arr[i] = 0;
-	return (arr);
+	array[i] = 0;
+	return (array);
 }
 
-int	**make_int_arr(t_struct *data)
+void	free_int_array(int **array, t_struct *filler)
 {
-	int	**arr;
 	int	i;
 
 	i = 0;
-	arr = (int **)malloc(sizeof(int *) * data->board_size.rows);
-	if (!arr)
-		return (NULL);
-	while (i < data->board_size.rows)
+	while (i < filler->board_size.rows)
 	{
-		arr[i] = (int *)malloc(sizeof(int) * data->board_size.cols);
-		if (!arr[i])
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+int	**create_int_array(t_struct *filler)
+{
+	int	**array;
+	int	i;
+
+	array = (int **)malloc(sizeof(int *) * filler->board_size.rows);
+	if (!array)
+		return (NULL);
+	i = 0;
+	while (i < filler->board_size.rows)
+	{
+		array[i] = (int *)malloc(sizeof(int) * filler->board_size.cols);
+		if (!array[i])
 		{
-			free_int_arr(arr, data);
+			free_int_array(array, filler);
 			return (NULL);
 		}
 		i++;
 	}
-	return (arr);
+	return (array);
 }

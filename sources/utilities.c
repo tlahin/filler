@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-t_cords	get_offset(int row, int col, t_cords piece, t_cords board)
+t_cords	calculate_offset(int row, int col, t_cords piece, t_cords board)
 {
 	t_cords	tmp;
 
@@ -21,36 +21,36 @@ t_cords	get_offset(int row, int col, t_cords piece, t_cords board)
 	return (tmp);
 }
 
-static void	reset_points(t_struct *data)
+static void	reset_points(t_struct *filler)
 {
-	data->piece_start.row = -1;
-	data->piece_start.col = -1;
-	data->piece_end.row = -1;
-	data->piece_end.col = -1;
+	filler->piece_start.row = -1;
+	filler->piece_start.col = -1;
+	filler->piece_end.row = -1;
+	filler->piece_end.col = -1;
 }
 
-void	find_borders(t_struct *data)
+void	find_borders(t_struct *filler)
 {
 	int	row;
 	int	col;
 
+	reset_points(filler);
 	row = 0;
-	col = 0;
-	reset_points(data);
-	while (row < data->piece_size.rows)
+	while (row < filler->piece_size.rows)
 	{
-		while (col < data->piece_size.cols)
+		col = 0;
+		while (col < filler->piece_size.cols)
 		{
-			if (data->piece[row][col] == '*')
+			if (filler->piece[row][col] == '*')
 			{
-				if (data->piece_start.row == -1)
-					data->piece_start.row = row;
-				if (data->piece_start.col == -1
-					|| data->piece_start.col > col)
-					data->piece_start.col = col;
-				data->piece_end.row = row;
-				if (data->piece_end.col < col)
-					data->piece_end.col = col;
+				if (filler->piece_start.row == -1)
+					filler->piece_start.row = row;
+				if (filler->piece_start.col == -1
+					|| filler->piece_start.col > col)
+					filler->piece_start.col = col;
+				filler->piece_end.row = row;
+				if (filler->piece_end.col < col)
+					filler->piece_end.col = col;
 			}
 			col++;
 		}
@@ -58,7 +58,7 @@ void	find_borders(t_struct *data)
 	}
 }
 
-char	char_parser(char c)
+char	parse_char(char c)
 {
 	if (c == 'x')
 		return ('X');
@@ -68,9 +68,9 @@ char	char_parser(char c)
 		return (c);
 }
 
-bool	on_board(t_struct *data, int row, int col)
+bool	on_board(t_struct *filler, int row, int col)
 {
 	return (row >= 0 && col >= 0
-		&& row < data->board_size.rows
-		&& col < data->board_size.cols);
+		&& row < filler->board_size.rows
+		&& col < filler->board_size.cols);
 }

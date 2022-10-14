@@ -33,10 +33,9 @@ all : $(NAME)
 $(NAME) :
 	@make -C ft_printf/
 	@echo "Compiling.."
-	@gcc -c $(FLAGS) $(INCLS) $(addprefix $(SRCS_DIR), $(SRCS))
-	@gcc $(FLAGS) $(OBJS) ft_printf/libftprintf.a -o $(NAME)
+	@gcc $(FLAGS) $(INCLS) -g -c $(addprefix $(SRCS_DIR), $(SRCS))
+	@gcc $(FLAGS) -g $(OBJS) ft_printf/libftprintf.a -o $(NAME)
 	@echo "Make complete."
-	@make fclean -C ft_printf/
 
 clean :
 	@echo "Removing object files.."

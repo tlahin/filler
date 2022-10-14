@@ -12,104 +12,104 @@
 
 #include "filler.h"
 
-static void	set_near(t_struct *data, int heat, int row, int col)
+static void	reset_heatmap(t_struct *filler)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	while (row < filler->board_size.rows)
+	{
+		col = 0;
+		while (col < filler->board_size.cols)
+		{
+			if (filler->board[row][col] == filler->enemy)
+				filler->heatmap[row][col] = 0;
+			else
+				filler->heatmap[row][col] = -1;
+			col++;
+		}
+		row++;
+	}
+}
+
+static void	set_neighbours(t_struct *filler, int depth, int row, int col)
 {
 	int	x;
 	int	y;
 
 	x = row - 1;
-	y = col - 1;
 	while (x <= row + 1)
 	{
+		y = col - 1;
 		while (y <= col + 1)
 		{
-			if (x > 0 && x < data->board_size.rows
-				&& y > 0 && y < data->board_size.cols
+			if (x > 0 && x < filler->board_size.rows
+				&& y > 0 && y < filler->board_size.cols
 				&& (x != row && y != col)
-				&& data->heatmap[x][y] == -1)
-				data->heatmap[x][y] = heat;
+				&& filler->heatmap[x][y] == -1)
+				filler->heatmap[x][y] = depth;
 			y++;
 		}
 		x++;
 	}
 }
 
-static void	set_heatmap(t_struct *data, int heat)
+static void	set_heatmap(t_struct *filler, int depth)
 {
 	int	row;
 	int	col;
 
 	row = 0;
-	col = 0;
-	while (row < data->board_size.rows)
+	while (row < filler->board_size.rows)
 	{
-		while (col < data->board_size.cols)
+		col = 0;
+		while (col < filler->board_size.cols)
 		{
-			if (data->heatmap[row][col] == heat)
-				set_near(data, heat + 1, row, col);
+			if (filler->heatmap[row][col] == depth)
+				set_neighbours(filler, depth + 1, row, col);
 			col++;
 		}
 		row++;
 	}
 }
 
-static void	reset_heatmap(t_struct *data)
+static void	go_to_center(t_struct *filler)
 {
 	int	row;
 	int	col;
 
 	row = 0;
-	col = 0;
-	while (row < data->board_size.rows)
+	while (row < filler->board_size.rows)
 	{
-		while (col < data->board_size.cols)
+		col = 0;
+		while (col < filler->board_size.cols)
 		{
-			if (data->board[row][col] == data->enemy)
-				data->heatmap[row][col] = 0;
+			if (filler->center_row_captured)
+				filler->heatmap[row][col] = distance_to_center(filler, row, col);
 			else
-				data->heatmap[row][col] = -1;
+				filler->heatmap[row][col] = \
+				ft_abs(filler->board_size.rows / 2 - row);
 			col++;
 		}
 		row++;
 	}
 }
 
-static void	get_middle(t_struct *data)
+void	update_heatmap(t_struct *filler)
 {
-	int	row;
-	int	col;
+	int	depth;
 
-	row = 0;
-	col = 0;
-	while (row < data->board_size.rows)
-	{
-		while (col < data->board_size.cols)
-		{
-			if (data->middle_row_taken)
-				data->heatmap[row][col] = distance_to_middle(data, row, col);
-			else
-				data->heatmap[row][col] = ft_abs(data->board_size.rows \
-				/ 2 - row);
-			col++;
-		}
-		row++;
-	}
-}
-
-void	update_heatmap(t_struct *data)
-{
-	int	heat;
-
-	heat = 0;
-	if (!data->middle_taken)
-		get_middle(data);
+	if (!filler->center_captured)
+		go_to_center(filler);
 	else
 	{
-		reset_heatmap(data);
-		while (heat < data->board_size.rows + data->board_size.cols)
+		reset_heatmap(filler);
+		depth = 0;
+		while (depth < filler->board_size.rows + filler->board_size.cols)
 		{
-			set_heatmap(data, heat);
-			heat++;
+			set_heatmap(filler, depth);
+			depth++;
 		}
 	}
 }

@@ -12,24 +12,24 @@
 
 #include "filler.h"
 
-void	update_middle(t_struct *data)
+void	update_centers(t_struct *filler)
 {
-	data->middle_taken = is_middle_taken(data);
-	data->middle_row_taken = is_middle_row_taken(data);
+	filler->center_captured = center_is_captured(filler);
+	filler->center_row_captured = center_row_is_captured(filler);
 }
 
-bool	is_middle_taken(t_struct *data)
+bool	center_is_captured(t_struct *filler)
 {
 	int	row;
 	int	col;
 
-	row = data->board_size.rows / 2;
-	col = data->board_size.cols / 2;
-	while (row <= data->board_size.rows / 2 + 1)
+	row = filler->board_size.rows / 2;
+	col = filler->board_size.cols / 2;
+	while (row <= filler->board_size.rows / 2 + 1)
 	{
-		while (col <= data->board_size.cols / 2 + 1)
+		while (col <= filler->board_size.cols / 2 + 1)
 		{
-			if (data->board[row][col] != '.')
+			if (filler->board[row][col] != '.')
 				return (true);
 			col++;
 		}
@@ -38,28 +38,28 @@ bool	is_middle_taken(t_struct *data)
 	return (false);
 }
 
-bool	is_middle_row_taken(t_struct *data)
+bool	center_row_is_captured(t_struct *filler)
 {
 	int	row;
 	int	col;
 
-	row = data->board_size.rows / 2;
+	row = filler->board_size.rows / 2;
 	col = 0;
-	while (col < data->board_size.cols)
+	while (col < filler->board_size.cols)
 	{
-		if (data->board[row][col] == data->player)
+		if (filler->board[row][col] == filler->player)
 			return (true);
 		col++;
 	}
 	return (false);
 }
 
-int	distance_to_middle(t_struct *data, int row, int col)
+int	distance_to_center(t_struct *filler, int row, int col)
 {
-	int	middle_row;
-	int	middle_col;
+	int	center_row;
+	int	center_col;
 
-	middle_row = data->board_size.rows / 2;
-	middle_col = data->board_size.cols / 2;
-	return (ft_abs(middle_row - row) + ft_abs(middle_col - col));
+	center_row = filler->board_size.rows / 2;
+	center_col = filler->board_size.cols / 2;
+	return (ft_abs(center_row - row) + ft_abs(center_col - col));
 }

@@ -12,117 +12,117 @@
 
 #include "filler.h"
 
-int	number_parser(char last)
+int	parse_number(char last)
 {
-	char	tmp;
-	int		nbr;
+	char	temp;
+	int		n;
 
-	tmp = last;
-	nbr = 0;
-	while (ft_isdigit(tmp))
+	temp = last;
+	n = 0;
+	while (ft_isdigit(temp))
 	{
-		nbr = nbr * 10 + (tmp - '0');
-		if (read(STDIN_FILENO, &tmp, 1) < 0)
+		n = n * 10 + (temp - '0');
+		if (read(0, &temp, 1) < 0)
 			return (-1);
 	}
-	return (nbr);
+	return (n);
 }
 
-int	size_parser(int *row, int *col)
+int	parse_player(t_struct *filler)
 {
-	char	tmp;
-	int		state;
+	char	temp;
 
-	tmp = ',';
-	state = 1;
-	while (!ft_isdigit(tmp) && state > 0)
-		state = read(STDIN_FILENO, &tmp, 1);
-	*row = number_parser(tmp);
-	state = read(STDIN_FILENO, &tmp, 1);
-	while (!ft_isdigit(tmp) && state > 0)
-		state = read(STDIN_FILENO, &tmp, 1);
-	*col = number_parser(tmp);
-	if (*row <= 0 || *col <= 0 || state == -1)
-		return (-1);
-	return (0);
-}
-
-int	piece_parser(t_struct *data)
-{
-	char	tmp[1];
-	int		row;
-	int		col;
-
-	row = 0;
-	col = 0;
-	if (size_parser(&data->piece_size.rows, &data->piece_size.cols) == -1)
-		return (-1);
-	data->piece = make_char_arr(data->piece_size.rows, \
-		data->piece_size.cols);
-	if (!data->piece)
-		return (-1);
-	while (row < data->piece_size.rows)
+	temp = '$';
+	while (!ft_isdigit(temp))
 	{
-		while (col < data->piece_size.cols)
-		{
-			if (read(STDIN_FILENO, tmp, 1) == -1)
-				return (-1);
-			if (ft_strchr("*.", tmp[0]))
-				data->piece[row][col++] = tmp[0];
-		}
-		row++;
+		if (read(0, &temp, 1) < 0)
+			return (-1);
 	}
-	find_borders(data);
+	if (temp == '1')
+	{
+		filler->player = 'O';
+		filler->enemy = 'X';
+	}
+	else if (temp == '2')
+	{
+		filler->player = 'X';
+		filler->enemy = 'O';
+	}
+	else
+		return (-1);
 	return (0);
 }
 
-int	board_parser(t_struct *data)
+int	parse_size(int *rows, int *columns)
 {
-	char	tmp[1];
+	char	temp;
+	int		status;
+
+	temp = ',';
+	status = 1;
+	while (!ft_isdigit(temp) && status > 0)
+		status = read(0, &temp, 1);
+	*rows = parse_number(temp);
+	status = read(0, &temp, 1);
+	while (!ft_isdigit(temp) && status > 0)
+		status = read(0, &temp, 1);
+	*columns = parse_number(temp);
+	if (*rows <= 0 || *columns <= 0 || status == -1)
+		return (-1);
+	return (0);
+}
+
+int	parse_board(t_struct *filler)
+{
 	int		row;
-	int		col;
+	int		column;
+	char	temp[1];
 
 	row = 0;
-	col = 0;
-	while (row < data->board_size.rows)
+	while (row < filler->board_size.rows)
 	{
-		while (col < data->board_size.cols)
+		column = 0;
+		while (column < filler->board_size.cols)
 		{
-			if (read(STDIN_FILENO, tmp, 1) == -1)
+			if (read(0, temp, 1) == -1)
 				return (-1);
-			if (ft_strchr("XxOo.", tmp[0]))
+			if (ft_strchr("XxOo.", temp[0]))
 			{
-				data->board[row][col] = char_parser(tmp[0]);
-				col++;
+				filler->board[row][column] = parse_char(temp[0]);
+				column++;
 			}
 		}
 		row++;
 	}
-	update_middle(data);
+	update_centers(filler);
 	return (0);
 }
 
-int	player_parser(t_struct *data)
+int	parse_piece(t_struct *filler)
 {
-	char	tmp;
+	int		row;
+	int		column;
+	char	temp[1];
 
-	tmp = '#';
-	while (!ft_isdigit(tmp))
-	{
-		if (read(STDIN_FILENO, &tmp, 1) < 0)
-			return (-1);
-	}
-	if (tmp == '1')
-	{
-		data->player = 'O';
-		data->enemy = 'X';
-	}
-	else if (tmp == '2')
-	{
-		data->player = 'X';
-		data->enemy = 'O';
-	}
-	else
+	if (parse_size(&filler->piece_size.rows, &filler->piece_size.cols) == -1)
 		return (-1);
+	filler->piece = create_char_array(filler->piece_size.rows, \
+		filler->piece_size.cols);
+	if (!filler->piece)
+		return (-1);
+	row = 0;
+	while (row < filler->piece_size.rows)
+	{
+		column = 0;
+		while (column < filler->piece_size.cols)
+		{
+			if (read(0, temp, 1) == -1)
+				return (-1);
+			if (ft_strchr("*.", temp[0]))
+				filler->piece[row][column++] = temp[0];
+		}
+		row++;
+	}
+	find_borders(filler);
 	return (0);
 }
