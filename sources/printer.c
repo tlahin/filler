@@ -12,16 +12,24 @@
 
 #include "filler.h"
 
+/*
+** Saving the cordinates into the struct
+*/
+
 void	save_result(t_struct *filler, int value, t_cords board, t_cords piece)
 {
-	filler->best_val = value;
+	filler->hot_val = value;
 	filler->result.row = board.row - piece.row;
 	filler->result.col = board.col - piece.col;
 }
 
+/*
+** Using my ft_printf to print out the the cordinates if a spot was found
+*/
+
 int	print_result(t_struct *filler)
 {
-	if (filler->best_val >= 0)
+	if (filler->hot_val >= 0)
 	{
 		ft_printf("%d %d\n", filler->result.row, filler->result.col);
 		return (0);

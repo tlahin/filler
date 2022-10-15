@@ -86,7 +86,10 @@ static void	go_to_center(t_struct *filler)
 		while (col < filler->board_size.cols)
 		{
 			if (filler->center_row_captured)
-				filler->heatmap[row][col] = distance_to_center(filler, row, col);
+			{
+				filler->heatmap[row][col] = \
+				distance_to_center(filler, row, col);
+			}
 			else
 				filler->heatmap[row][col] = \
 				ft_abs(filler->board_size.rows / 2 - row);

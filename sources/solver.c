@@ -92,7 +92,7 @@ static void	place_piece(t_struct *filler, t_cords board_coord)
 				filler->tmp_val = 0;
 				temp_value = fit_piece(filler, board_coord, piece_coord);
 				if (temp_value > 0
-					&& (filler->best_val == -1 || filler->best_val > temp_value))
+					&& (filler->hot_val == -1 || filler->hot_val > temp_value))
 					save_result(filler, temp_value, board_coord, piece_coord);
 			}
 		}
@@ -106,7 +106,7 @@ int	solve(t_struct *filler)
 	int		col;
 	t_cords	temp_coord;
 
-	filler->best_val = -1;
+	filler->hot_val = -1;
 	row = 0;
 	while (row < filler->board_size.rows)
 	{
