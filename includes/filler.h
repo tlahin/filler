@@ -14,7 +14,6 @@
 # define FILLER_H
 
 # include "../ft_printf/includes/ft_printf.h"
-# include <stdio.h> 														//delete
 
 /*
 ** Structures
@@ -43,7 +42,7 @@ typedef struct s_struct
 	char		**piece;
 	t_cords		board_cords;
 	t_cords		piece_cords;
-	int			best_val;
+	int			hot_val;
 	int			tmp_val;
 	int			connections;
 	t_cords		result;
