@@ -13,8 +13,8 @@
 #ifndef FILLER_H
 # define FILLER_H
 
-# include "../ft_printf/includes/ft_printf.h"
-
+# include "../libft/libft.h"
+# include "../libft/ft_printf/includes/ft_printf.h"
 /*
 ** Structures
 */
@@ -55,7 +55,7 @@ typedef struct s_struct
 }	t_struct;
 
 /*
-** Main and arrs
+** Main and arrays
 */
 
 int		main(void);
