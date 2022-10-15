@@ -22,7 +22,7 @@ SRCS =	main.c \
 		solver.c \
 		printer.c
 
-INCLS = -I./ft_printf/includes -I./includes
+INCLS = -I./libft/libft.h -I./includes
 
 OBJS = $(SRCS:.c=.o)
 
@@ -31,20 +31,20 @@ FLAGS = -Wall -Werror -Wextra
 all : $(NAME)
 
 $(NAME) :
-	@make -C ft_printf/
+	@make -C libft/
 	@echo "Compiling.."
 	@gcc $(FLAGS) $(INCLS) -g -c $(addprefix $(SRCS_DIR), $(SRCS))
-	@gcc $(FLAGS) -g $(OBJS) ft_printf/libftprintf.a -o $(NAME)
+	@gcc $(FLAGS) -g $(OBJS) libft/libft.a -o $(NAME)
 	@echo "Make complete."
 
 clean :
 	@echo "Removing object files.."
-	@make -C ft_printf/ clean
+	@make -C libft/ clean
 	@rm -f $(OBJS)
 
 fclean : clean
 	@echo "Removing executabble.."
-	@make -C ft_printf/ fclean
+	@make -C libft/ fclean
 	@rm -f $(NAME)
 
 re : fclean all
