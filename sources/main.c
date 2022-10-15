@@ -17,7 +17,7 @@
 ** and create both board and heatmap arrays
 */
 
-int	init__filler(t_struct *filler)
+int	init_filler(t_struct *filler)
 {
 	ft_bzero(filler, sizeof(*filler));
 	if (parse_player(filler) == -1 \
@@ -44,13 +44,19 @@ int	free_stuff(t_struct *filler, int ret)
 	return (ret);
 }
 
+/*
+** Start of the program, checking if board and piece are valid,
+** updating heatmap and finding the hottest spot for the piece
+** utilising a heatmap
+*/
+
 int	main(void)
 {
 	t_struct	filler;
 	int			state;
 
 	state = 1;
-	if (init__filler(&filler) == -1)
+	if (init_filler(&filler) == -1)
 		return (free_stuff(&filler, -1));
 	while (state >= 0)
 	{

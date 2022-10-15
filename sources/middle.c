@@ -18,6 +18,10 @@ void	update_centers(t_struct *filler)
 	filler->center_row_captured = center_row_is_captured(filler);
 }
 
+/*
+** Checks if the middle space is taken or not
+*/
+
 bool	center_is_captured(t_struct *filler)
 {
 	int	row;
@@ -37,6 +41,10 @@ bool	center_is_captured(t_struct *filler)
 	}
 	return (false);
 }
+
+/*
+** Checks if middle row has pieces that belong to the player
+*/
 
 bool	center_row_is_captured(t_struct *filler)
 {

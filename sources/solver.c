@@ -100,11 +100,19 @@ static void	place_piece(t_struct *filler, t_cords board_coord)
 	}
 }
 
+/*
+** Loops through the whole board,
+** checking if the spot is connected to the player
+** and that it is a valid place for the given piece
+** if so it places the piece on the board and saves
+** the cordinates
+*/
+
 int	solve(t_struct *filler)
 {
 	int		row;
 	int		col;
-	t_cords	temp_coord;
+	t_cords	temp_cord;
 
 	filler->hot_val = -1;
 	row = 0;
@@ -113,11 +121,11 @@ int	solve(t_struct *filler)
 		col = 0;
 		while (col < filler->board_size.cols)
 		{
-			temp_coord.row = row;
-			temp_coord.col = col;
+			temp_cord.row = row;
+			temp_cord.col = col;
 			if (filler->board[row][col] == filler->player
 				&& can_place(filler, row, col))
-				place_piece(filler, temp_coord);
+				place_piece(filler, temp_cord);
 			col++;
 		}
 		row++;

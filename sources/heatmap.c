@@ -12,6 +12,10 @@
 
 #include "filler.h"
 
+/*
+** Resets the heatmap values to -1 and enemy player spot values to 0
+*/
+
 static void	reset_heatmap(t_struct *filler)
 {
 	int	row;
@@ -33,7 +37,7 @@ static void	reset_heatmap(t_struct *filler)
 	}
 }
 
-static void	set_neighbours(t_struct *filler, int depth, int row, int col)
+static void	set_near(t_struct *filler, int heat, int row, int col)
 {
 	int	x;
 	int	y;
@@ -48,14 +52,18 @@ static void	set_neighbours(t_struct *filler, int depth, int row, int col)
 				&& y > 0 && y < filler->board_size.cols
 				&& (x != row && y != col)
 				&& filler->heatmap[x][y] == -1)
-				filler->heatmap[x][y] = depth;
+				filler->heatmap[x][y] = heat;
 			y++;
 		}
 		x++;
 	}
 }
 
-static void	set_heatmap(t_struct *filler, int depth)
+/*
+** Sets the heatmap values relative to the opponent
+*/
+
+static void	set_heatmap(t_struct *filler, int heat)
 {
 	int	row;
 	int	col;
@@ -66,13 +74,17 @@ static void	set_heatmap(t_struct *filler, int depth)
 		col = 0;
 		while (col < filler->board_size.cols)
 		{
-			if (filler->heatmap[row][col] == depth)
-				set_neighbours(filler, depth + 1, row, col);
+			if (filler->heatmap[row][col] == heat)
+				set_near(filler, heat + 1, row, col);
 			col++;
 		}
 		row++;
 	}
 }
+
+/*
+** Sets the heatmap values relative to the center of the map
+*/
 
 static void	go_to_center(t_struct *filler)
 {
@@ -99,20 +111,25 @@ static void	go_to_center(t_struct *filler)
 	}
 }
 
+/*
+** Checks if middle spot has already been claimed, if not it head towards there
+** else it heads towards the opponent
+*/
+
 void	update_heatmap(t_struct *filler)
 {
-	int	depth;
+	int	heat;
 
 	if (!filler->center_captured)
 		go_to_center(filler);
 	else
 	{
 		reset_heatmap(filler);
-		depth = 0;
-		while (depth < filler->board_size.rows + filler->board_size.cols)
+		heat = 0;
+		while (heat < filler->board_size.rows + filler->board_size.cols)
 		{
-			set_heatmap(filler, depth);
-			depth++;
+			set_heatmap(filler, heat);
+			heat++;
 		}
 	}
 }

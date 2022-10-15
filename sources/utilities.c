@@ -29,6 +29,11 @@ static void	reset_points(t_struct *filler)
 	filler->piece_end.col = -1;
 }
 
+/*
+** Loops throught the piece canvas to find the most left and right side
+** of the piece aswell as its starting row and ending row
+*/
+
 void	find_borders(t_struct *filler)
 {
 	int	row;
