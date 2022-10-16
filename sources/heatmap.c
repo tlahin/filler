@@ -37,6 +37,11 @@ static void	reset_heatmap(t_struct *filler)
 	}
 }
 
+/*
+** Checks the surrounding cordinates, if they don't have
+** a heatvalue set yet, it will set it to the given value.
+*/
+
 static void	set_near(t_struct *filler, int heat, int row, int col)
 {
 	int	x;
@@ -112,8 +117,9 @@ static void	go_to_center(t_struct *filler)
 }
 
 /*
-** Checks if middle spot has already been claimed, if not it head towards there
-** else it heads towards the opponent
+** Checks if middle spot has already been claimed, if not it will
+** set the heatmap values towards the center otherwise towards
+** the enemy player
 */
 
 void	update_heatmap(t_struct *filler)

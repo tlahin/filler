@@ -12,6 +12,11 @@
 
 #include "filler.h"
 
+/*
+** Checks if the surrounding cordinates are empty
+** and within the board limits.
+*/
+
 static bool	can_place(t_struct *filler, int row, int col)
 {
 	int	x;
@@ -43,6 +48,11 @@ static bool	invalid_point(t_struct *filler, int row, int col)
 		|| filler->board[row][col] == '.'));
 }
 
+/*
+** Checking if the piece fits on the board and is connected
+** to the player, if so it returns the heatvalue found in the cordinates
+*/
+
 static int	fit_piece(t_struct *filler, t_cords board, t_cords piece)
 {
 	int		row;
@@ -71,12 +81,17 @@ static int	fit_piece(t_struct *filler, t_cords board, t_cords piece)
 	return (-1);
 }
 
-static void	place_piece(t_struct *filler, t_cords board_coord)
+/*
+** Using fit_piece function and find the best
+** position for the piece by comparing heatvalues
+*/
+
+static void	place_piece(t_struct *filler, t_cords board_cords)
 {
 	int		piece_row;
 	int		piece_col;
 	int		temp_value;
-	t_cords	piece_coord;
+	t_cords	piece_cords;
 
 	piece_row = filler->piece_start.row;
 	while (piece_row <= filler->piece_end.row)
@@ -86,14 +101,14 @@ static void	place_piece(t_struct *filler, t_cords board_coord)
 		{
 			if (filler->piece[piece_row][piece_col] == '*')
 			{
-				piece_coord.row = piece_row;
-				piece_coord.col = piece_col;
+				piece_cords.row = piece_row;
+				piece_cords.col = piece_col;
 				filler->connections = 0;
 				filler->tmp_val = 0;
-				temp_value = fit_piece(filler, board_coord, piece_coord);
+				temp_value = fit_piece(filler, board_cords, piece_cords);
 				if (temp_value > 0
 					&& (filler->hot_val == -1 || filler->hot_val > temp_value))
-					save_result(filler, temp_value, board_coord, piece_coord);
+					save_result(filler, temp_value, board_cords, piece_cords);
 			}
 		}
 		piece_row++;
@@ -103,9 +118,9 @@ static void	place_piece(t_struct *filler, t_cords board_coord)
 /*
 ** Loops through the whole board,
 ** checking if the spot is connected to the player
-** and that it is a valid place for the given piece
-** if so it places the piece on the board and saves
-** the cordinates
+** and that it is a valid place for the given piece.
+** If so, it places the piece on the board and prints
+** the cordinates saved in the struct
 */
 
 int	solve(t_struct *filler)
