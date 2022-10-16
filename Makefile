@@ -22,7 +22,7 @@ SRCS =	main.c \
 		solver.c \
 		printer.c
 
-INCLS = -I./libft/libft.h -I./includes
+INCLS = -I./libft/ -I./includes
 
 OBJS = $(SRCS:.c=.o)
 
