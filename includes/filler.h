@@ -50,8 +50,8 @@ typedef struct s_struct
 	int			col_dir;
 	t_cords		piece_start;
 	t_cords		piece_end;
-	bool		center_captured;
-	bool		center_row_captured;
+	bool		middle_captured;
+	bool		middle_row_captured;
 }	t_struct;
 
 /*
@@ -84,10 +84,10 @@ void	update_heatmap(t_struct *data);
 ** Middles
 */
 
-bool	center_row_is_captured(t_struct *data);
-bool	center_is_captured(t_struct *data);
-void	update_centers(t_struct *data);
-int		distance_to_center(t_struct *data, int row, int col);
+bool	middle_row_is_captured(t_struct *data);
+bool	middle_is_captured(t_struct *data);
+void	update_middles(t_struct *data);
+int		distance_to_middle(t_struct *data, int row, int col);
 
 /*
 ** Utilities
