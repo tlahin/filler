@@ -88,10 +88,10 @@ static void	set_heatmap(t_struct *filler, int heat)
 }
 
 /*
-** Sets the heatmap values relative to the center of the map
+** Sets the heatmap values relative to the middle of the map
 */
 
-static void	go_to_center(t_struct *filler)
+static void	go_to_middle(t_struct *filler)
 {
 	int	row;
 	int	col;
@@ -102,10 +102,10 @@ static void	go_to_center(t_struct *filler)
 		col = 0;
 		while (col < filler->board_size.cols)
 		{
-			if (filler->center_row_captured)
+			if (filler->middle_row_captured)
 			{
 				filler->heatmap[row][col] = \
-				distance_to_center(filler, row, col);
+				distance_to_middle(filler, row, col);
 			}
 			else
 				filler->heatmap[row][col] = \
@@ -118,7 +118,7 @@ static void	go_to_center(t_struct *filler)
 
 /*
 ** Checks if middle spot has already been claimed, if not it will
-** set the heatmap values towards the center otherwise towards
+** set the heatmap values towards the middle otherwise towards
 ** the enemy player
 */
 
@@ -126,8 +126,8 @@ void	update_heatmap(t_struct *filler)
 {
 	int	heat;
 
-	if (!filler->center_captured)
-		go_to_center(filler);
+	if (!filler->middle_captured)
+		go_to_middle(filler);
 	else
 	{
 		reset_heatmap(filler);

@@ -12,17 +12,17 @@
 
 #include "filler.h"
 
-void	update_centers(t_struct *filler)
+void	update_middles(t_struct *filler)
 {
-	filler->center_captured = center_is_captured(filler);
-	filler->center_row_captured = center_row_is_captured(filler);
+	filler->middle_captured = middle_is_captured(filler);
+	filler->middle_row_captured = middle_row_is_captured(filler);
 }
 
 /*
 ** Checks if the middle space is taken or not
 */
 
-bool	center_is_captured(t_struct *filler)
+bool	middle_is_captured(t_struct *filler)
 {
 	int	row;
 	int	col;
@@ -46,7 +46,7 @@ bool	center_is_captured(t_struct *filler)
 ** Checks if middle row has pieces that belong to the player
 */
 
-bool	center_row_is_captured(t_struct *filler)
+bool	middle_row_is_captured(t_struct *filler)
 {
 	int	row;
 	int	col;
@@ -62,12 +62,12 @@ bool	center_row_is_captured(t_struct *filler)
 	return (false);
 }
 
-int	distance_to_center(t_struct *filler, int row, int col)
+int	distance_to_middle(t_struct *filler, int row, int col)
 {
-	int	center_row;
-	int	center_col;
+	int	middle_row;
+	int	middle_col;
 
-	center_row = filler->board_size.rows / 2;
-	center_col = filler->board_size.cols / 2;
-	return (ft_abs(center_row - row) + ft_abs(center_col - col));
+	middle_row = filler->board_size.rows / 2;
+	middle_col = filler->board_size.cols / 2;
+	return (ft_abs(middle_row - row) + ft_abs(middle_col - col));
 }

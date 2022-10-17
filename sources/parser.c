@@ -115,7 +115,7 @@ int	parse_board(t_struct *filler)
 		}
 		row++;
 	}
-	update_centers(filler);
+	update_middles(filler);
 	return (0);
 }
 
