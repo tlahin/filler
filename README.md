@@ -6,7 +6,7 @@
 
 The game is played between two players taking turns at placing a piece. Each successfully placed piece yields a number of points. The goal of the game is get the highest score possible. During the game each player attempts to place as many pieces as possible on the grid while attempting to prevent his or her opponent from doing the same. At the end of the game, the player with the most points wins the match.
 
-The game itself is played on a host VM provided with the subject. Each turn MV gives the player in turn information about the grid, its size and current state. It also tells the player what kind of piece needs to be placed on the aforementioned grid. Player’s objective is to answer the MV with a set of coordinates after which it’s the other player’s turn to do the same with the next given piece.
+The game itself is played on a host VM provided with the subject. Each turn VM gives the player in turn information about the grid, its size and current state. It also tells the player what kind of piece needs to be placed on the aforementioned grid. Player’s objective is to answer the MV with a set of coordinates after which it’s the other player’s turn to do the same with the next given piece.
 
 **Usage**
 
