@@ -19,7 +19,7 @@ make && make clean
 To run the program against another player, launch it from the root of the repository:
 
 ```bash
-./resources/filler_vm -p1 ./altikka.filler -p2 ./resources/players/carli.filler -f ./resources/maps/map02
+./resources/filler_vm -p1 ./tlahin.filler -p2 ./resources/players/carli.filler -f ./resources/maps/map02
 ```
 
 Subject: [filler.en.pdf](https://cdn.intra.42.fr/pdf/pdf/6630/filler.en.pdf)
