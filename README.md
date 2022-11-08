@@ -1,6 +1,6 @@
 # Filler
 
-#### **Inroduction**
+#### **Introduction**
 
 **Filler** is a project about algorithmic game, purpose of which is to fill a fixed sized grid with pieces of random size and shape. Pieces can’t be stacked more than one square above each other and they can’t exceed the grid. If these conditions are not met - the game ends.
 
