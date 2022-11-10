@@ -12,8 +12,8 @@ The game itself is played on a host VM provided with the subject. Each turn VM g
 
 Compile the executable with Makefile:
 
-```bash
-make && make clean
+```shell
+$make && make clean
 ```
 
 To run the program against another player, launch it from the root of the repository:
